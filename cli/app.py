@@ -1,19 +1,15 @@
-from .userInterface.command_line_interface import get_args
-from .presentation.command_parser import parse_command
-from .infraestructure.sqlite_adapter import SQLiteDatabaseHandler
-from .application.config import Config
+"""Entry point of the ``easyk8s`` executable."""
+from cli.infraestructure.composition import build_services
+from cli.userInterface.app import run
 
-def main():
-    config = Config()
-    database = SQLiteDatabaseHandler()
-    database.connect()
-    console_input = get_args()
 
-    parsed_command = parse_command(console_input)
+def main(argv: list[str] | None = None) -> int:
+    """Run the command line with the real implementations.
 
-    if parsed_command is None:
-        return 1
+    Args:
+        argv: Arguments without the program name; None reads ``sys.argv``.
 
-    command, args = parsed_command
-    database.close()
-    return 0
+    Returns:
+        The exit code.
+    """
+    return run(argv, build_services)

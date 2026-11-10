@@ -1,0 +1,51 @@
+# Example template.yaml. Create the template with: easyk8s template create
+# Variables are written as [%name%] (spaces inside are optional) and can be
+# used in file contents, file and folder names, and build/deploy commands.
+# Write \[%name%] to keep the literal text [%name%].
+tag: localhost:8000/myorganization/mytemplate:latest
+description: Example microservice template
+# readme: docs/README.md   # optional Markdown documentation
+
+template:
+  layers:
+    - origin: tests/
+      objective: name/
+
+    - origin: build.bat
+      objective: .
+
+instantiation:
+  arguments:
+    - name: service
+      type: str
+      default: "my-service"
+      description: "Name of the service"
+
+build:
+  arguments:
+    - name: docker_user
+      type: str
+      default: "my_docker_user"
+      description: "Docker Hub user"
+
+    - name: push
+      type: bool
+      default: false
+
+  commands:
+    - "makeDirectory dist"
+    - "docker build -t [%docker_user%]/[%service%] ."
+    - "docker push [%docker_user%]/[%service%]"
+
+deploy:
+  arguments:
+    - name: namespace
+      type: str
+      default: "default"
+
+    - name: replicas
+      type: int
+      default: 1
+
+  commands:
+    - "kubectl create deployment [%service%] -n [%namespace%] --image=[%service%] --replicas=[%replicas%]"

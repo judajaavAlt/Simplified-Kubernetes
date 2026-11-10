@@ -1,0 +1,28 @@
+# Example of the config.template that "easyk8s template setup" writes.
+# It keeps the build and deploy sections of the template, and the values
+# chosen during the setup as instantiation defaults, so the commands can use
+# them. Run it with: easyk8s instance -b -d --dry-run   (first time)
+#                    easyk8s instance -b -d
+template:
+  id: null
+  tag: localhost:8000/myorganization/mytemplate:latest
+instantiation:
+  arguments:
+  - name: service
+    type: str
+    default: my-service
+build:
+  arguments:
+  - name: docker_user
+    type: str
+    default: my_docker_user
+  commands:
+  - makeDirectory dist
+  - docker build -t [%docker_user%]/[%service%] .
+deploy:
+  arguments:
+  - name: namespace
+    type: str
+    default: default
+  commands:
+  - print deploying [%service%] to [%namespace%]
