@@ -2,12 +2,17 @@
 CLI (Command Line Interface)
 ============================
 
-.. toctree::
-   :maxdepth: 3
+Layers from bottom to top; ``infraestructure`` is transversal and is injected from the composition root.
 
-   constants
-   userInterface
-   presentation
+.. toctree::
+   :maxdepth: 2
+
+   usage
+   data
    persistence
-   infraestructure
    domain
+   application
+   presentation
+   userInterface
+   infraestructure
+   entrypoints

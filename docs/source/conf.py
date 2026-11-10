@@ -29,6 +29,12 @@ exclude_patterns = []
 autodoc_member_order = "bysource"
 autodoc_inherit_docstrings = False
 
+# Docstrings follow the Google style; constructors are documented too.
+napoleon_google_docstring = True
+napoleon_numpy_docstring = False
+napoleon_include_init_with_doc = True
+napoleon_use_ivar = True
+
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

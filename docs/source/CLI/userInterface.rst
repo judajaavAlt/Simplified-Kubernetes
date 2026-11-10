@@ -1,8 +1,13 @@
-===============================
-user interface
-===============================
+=============
+userInterface
+=============
 
-.. automodule:: cli.userInterface.command_line_interface
+Assembly of the root ``easyk8s`` command and the error handling (exit codes).
+
+``cli.userInterface.app``
+-------------------------
+
+.. automodule:: cli.userInterface.app
    :members:
-   :undoc-members:
+   :private-members:
    :show-inheritance:
